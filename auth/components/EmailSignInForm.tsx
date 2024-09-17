@@ -5,7 +5,7 @@ import { useFormState } from "react-dom";
 import { emailSignInAction } from "@/auth/actions";
 import { SubmitButton } from "./SubmitButton";
 
-export function EmailLoginForm() {
+export function EmailSignInForm({ children }: { children: React.ReactNode }) {
   const [errors, action] = useFormState(emailSignInAction, undefined);
 
   return (
@@ -16,7 +16,7 @@ export function EmailLoginForm() {
         placeholder="email"
         className="border p-2 w-full"
       />
-      <SubmitButton>Login with email</SubmitButton>
+      <SubmitButton>{children}</SubmitButton>
       {errors && (
         <ul>
           {errors.map((e, i) => (

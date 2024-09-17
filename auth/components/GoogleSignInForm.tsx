@@ -3,10 +3,10 @@
 import { googleSignInAction } from "@/auth/actions";
 import { SubmitButton } from "./SubmitButton";
 
-export function GoogleLoginForm() {
+export function GoogleSignInForm({ children }: { children: React.ReactNode }) {
   return (
     <form action={googleSignInAction}>
-      <SubmitButton>Login with Google</SubmitButton>
+      <SubmitButton>{children}</SubmitButton>
     </form>
   );
 }

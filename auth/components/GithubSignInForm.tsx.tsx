@@ -3,10 +3,10 @@
 import { githubSignInAction } from "@/auth/actions";
 import { SubmitButton } from "./SubmitButton";
 
-export function GithubLoginForm() {
+export function GithubSignInForm({ children }: { children: React.ReactNode }) {
   return (
     <form action={githubSignInAction}>
-      <SubmitButton>Login with Github</SubmitButton>
+      <SubmitButton>{children}</SubmitButton>
     </form>
   );
 }

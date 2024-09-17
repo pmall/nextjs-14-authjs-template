@@ -3,10 +3,10 @@
 import { signOutAction } from "@/auth/actions";
 import { SubmitButton } from "./SubmitButton";
 
-export default function LogoutForm() {
+export function SignOutForm({ children }: { children: React.ReactNode }) {
   return (
     <form action={signOutAction}>
-      <SubmitButton>Logout</SubmitButton>
+      <SubmitButton>{children}</SubmitButton>
     </form>
   );
 }

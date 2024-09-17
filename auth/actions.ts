@@ -3,41 +3,38 @@
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
-import { signIn, signOut } from "@/auth";
-import { cookies } from "next/headers";
+import { signIn, signOut, redirects } from ".";
 
 const emailSchema = z.object({
   email: z.string().email(),
 });
 
 export const emailSignInAction = async (_: any, formData: FormData) => {
-  try {
-    const { email } = emailSchema.parse(Object.fromEntries(formData));
+  const result = emailSchema.safeParse(Object.fromEntries(formData));
 
-    await signIn("nodemailer", {
-      email,
-      redirect: false,
-      redirectTo: "/dashboard",
-    });
-
-    redirect(`/verify?email=${email}`);
-  } catch (e) {
-    if (e instanceof z.ZodError) {
-      return e.flatten().fieldErrors[0];
-    }
-
-    throw e;
+  if (!result.success) {
+    return result.error.flatten().fieldErrors.email;
   }
+
+  const email = result.data.email;
+
+  await signIn("nodemailer", {
+    email,
+    redirect: false,
+    redirectTo: redirects.protected,
+  });
+
+  redirect(`${redirects.verify}?email=${email}`);
 };
 
 export const googleSignInAction = async () => {
-  await signIn("google", { redirectTo: "/dashboard" });
+  await signIn("google", { redirectTo: redirects.protected });
 };
 
 export const githubSignInAction = async () => {
-  await signIn("github", { redirectTo: "/dashboard" });
+  await signIn("github", { redirectTo: redirects.protected });
 };
 
 export const signOutAction = async () => {
-  await signOut();
+  await signOut({ redirectTo: redirects.home });
 };

@@ -1,19 +1,13 @@
-import { redirect } from "next/navigation";
+import { SignedIn } from "@/auth/components/SignedIn";
+import { SignOutForm } from "@/auth/components/SignOutForm";
 
-import { auth } from "@/auth";
-import LogoutForm from "@/components/LogoutForm";
-
-export default async function Dashboard() {
-  const session = await auth();
-
-  if (session === null) {
-    redirect("/");
-  }
-
+export default function Dashboard() {
   return (
-    <div className="max-w-96 mx-auto">
-      <h1>Welcome to the dashboard</h1>
-      <LogoutForm />
-    </div>
+    <SignedIn>
+      <div className="max-w-96 mx-auto">
+        <h1>Welcome to the dashboard</h1>
+        <SignOutForm>Logout</SignOutForm>
+      </div>
+    </SignedIn>
   );
 }
