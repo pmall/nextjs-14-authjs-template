@@ -1,6 +1,6 @@
 # Next.js 14 Authentication Template with Auth.js
 
-This repository is a template for setting up authentication with Auth.js in a Next.js 14 project using the page router and server actions.
+This repository is a template for setting up authentication with Auth.js in a Next.js 14 project using the app router and server actions.
 
 ### Key Features
 
