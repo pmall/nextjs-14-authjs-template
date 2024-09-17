@@ -3,7 +3,8 @@
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
-import { signIn, signOut, redirects } from ".";
+import { signIn, signOut } from ".";
+import { urls } from "./config";
 
 const emailSchema = z.object({
   email: z.string().email(),
@@ -21,16 +22,16 @@ export const emailSignInAction = async (_: any, formData: FormData) => {
   await signIn("nodemailer", {
     email,
     redirect: false,
-    redirectTo: redirects.protected,
+    redirectTo: urls.protected,
   });
 
-  redirect(`${redirects.verify}?email=${email}`);
+  redirect(`${urls.verify}?email=${email}`);
 };
 
 export const providerSignInAction = async (provider: string) => {
-  await signIn(provider, { redirectTo: redirects.protected });
+  await signIn(provider, { redirectTo: urls.protected });
 };
 
 export const signOutAction = async () => {
-  await signOut({ redirectTo: redirects.home });
+  await signOut({ redirectTo: urls.home });
 };

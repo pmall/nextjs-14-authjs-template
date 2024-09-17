@@ -8,6 +8,7 @@ export const env = createEnv({
   server: {
     AUTH_SECRET: z.string().min(44),
     EMAIL_SERVER: z.string().min(1),
+    EMAIL_FROM: z.string().email(),
     AUTH_GOOGLE_ID: z.string().min(1),
     AUTH_GOOGLE_SECRET: z.string().min(1),
     AUTH_GITHUB_ID: z.string().min(1),
