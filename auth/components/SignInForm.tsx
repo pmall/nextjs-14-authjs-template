@@ -1,7 +1,6 @@
 import { SignedOut } from "./SignedOut";
 import { EmailSignInForm } from "./EmailSignInForm";
-import { GoogleSignInForm } from "./GoogleSignInForm";
-import { GithubSignInForm } from "./GithubSignInForm.tsx";
+import { ProviderSignInForm } from "./ProviderSignInForm";
 
 export function SignInForm() {
   return (
@@ -11,8 +10,12 @@ export function SignInForm() {
         <EmailSignInForm>Login with email</EmailSignInForm>
         <hr />
         <div className="flex flex-col gap-2">
-          <GoogleSignInForm>Login with Google</GoogleSignInForm>
-          <GithubSignInForm>Login with Github</GithubSignInForm>
+          <ProviderSignInForm provider="google">
+            Login with Google
+          </ProviderSignInForm>
+          <ProviderSignInForm provider="github">
+            Login with Github
+          </ProviderSignInForm>
         </div>
       </div>
     </SignedOut>

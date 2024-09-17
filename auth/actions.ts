@@ -27,12 +27,8 @@ export const emailSignInAction = async (_: any, formData: FormData) => {
   redirect(`${redirects.verify}?email=${email}`);
 };
 
-export const googleSignInAction = async () => {
-  await signIn("google", { redirectTo: redirects.protected });
-};
-
-export const githubSignInAction = async () => {
-  await signIn("github", { redirectTo: redirects.protected });
+export const providerSignInAction = async (provider: string) => {
+  await signIn(provider, { redirectTo: redirects.protected });
 };
 
 export const signOutAction = async () => {
