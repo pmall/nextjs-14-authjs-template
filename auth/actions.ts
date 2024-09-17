@@ -21,10 +21,11 @@ export const emailSignInAction = async (_: any, formData: FormData) => {
 
   await signIn("nodemailer", {
     email,
-    redirect: false,
-    redirectTo: urls.protected,
+    redirect: false, // to prevent the signIn function to redirect itself to /api/auth/verify-request
+    redirectTo: urls.protected, // redirect to the protected page *after* email verification
   });
 
+  // we then redirect manually to a confirmation page with a nice url
   redirect(`${urls.verify}?email=${email}`);
 };
 

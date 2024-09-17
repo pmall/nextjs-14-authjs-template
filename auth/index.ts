@@ -10,10 +10,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   adapter: adapter,
   providers: [
+    // any email provider can be used
+    // the provider id must then be updated in ./actions.ts => emailSignInAction()
     Nodemailer({
       server: env.EMAIL_SERVER,
       from: env.EMAIL_FROM,
       sendVerificationRequest: ({ identifier, url }) => {
+        // sending the email must be implemented according to your setup
         console.log(identifier, url);
       },
     }),
